@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -40,9 +42,21 @@ public class CrimeListFragment extends Fragment {
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder {
+        private TextView mTitleTextView;
+        private TextView mDateTextView;
 
-        public CrimeHolder(LayoutInflater inflater,ViewGroup parent) {
+        private Crime mCrime;
+
+        public void bind(Crime crime) {
+            mTitleTextView.setText(crime.getTitle());
+            mDateTextView.setText(crime.getDate().toString());
+        }
+
+        public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_crime, parent, false));
+
+            mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
+            mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
         }
     }
 
@@ -57,12 +71,15 @@ public class CrimeListFragment extends Fragment {
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new CrimeHolder(layoutInflater,parent);
+            Log.d("onCreateViewHolder","WQ_onCreateViewHolder");
+            return new CrimeHolder(layoutInflater, parent);
         }
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
-
+            Crime crime = mCrimes.get(position);
+            Log.i("onBindViewHolder","WQ_onBindViewHolder");
+            holder.bind(crime);
         }
 
         @Override
