@@ -41,8 +41,8 @@ public class CrimeListFragment extends Fragment {
 
     private class CrimeHolder extends RecyclerView.ViewHolder {
 
-        public CrimeHolder(View itemView) {
-            super(itemView);
+        public CrimeHolder(LayoutInflater inflater,ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_crime, parent, false));
         }
     }
 
@@ -57,8 +57,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
-            return new CrimeHolder(view);
+            return new CrimeHolder(layoutInflater,parent);
         }
 
         @Override
